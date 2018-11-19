@@ -1,26 +1,39 @@
-import React from 'react';
+import React, {Component} from 'react';
+import Button from '../../UI/Button/Button';
 
-const OrderSummary = (props) => {
-  const ingredientSummary = Object.keys(props.ingredients)
-  .map(igKey => {
+class orderSummary extends Component {
+
+
+  componentWillUpdate(){
+    console.log("[OrderSummary] WillUpdate");
+  }
+  render(){
+  const ingredientSummary = Object.keys( this.props.ingredients )
+  .map( igKey => {
     return (
-      <li key= {igKey}> <span  style={{textTransform: 'capitalize'}}> {igKey} </span>: {props.ingredients[igKey]}
-    </li>);
-  })
-  console.log('ingredientSummary:',ingredientSummary);
-  return(
-    <>
-    <h3> Yourder </h3>
-    <h3> Burger ingredients </h3>
-    <ul>
-    {ingredientSummary}
-    </ul>
+      <li key={igKey}>
+      <span style={{ textTransform: 'capitalize' }}>{igKey}</span>: {this.props.ingredients[igKey]}
+      </li> );
+    } );
 
-<p> Continue to checkout? </p>
+    return (
+      <>
+      <h3>Yourder</h3>
+      <p>A delicious burger with the following ingredients:</p>
+      <ul>
+      {ingredientSummary}
+      </ul>
+      <p> Total Price: {this.props.price} </p>
+      <p>Continue to Checkout?</p>
+      <Button btnType = "Danger" clicked={this.props.purchaseCancelled}>
+      Cancel
+      </Button>
+      <Button btnType= "Success" clicked={this.props.purchaseContinued}>
+      Continue
+      </Button>
+      </>
+    );
+  };
+}
 
-    </>
-  );
-
-};
-
-export default OrderSummary;
+  export default orderSummary;

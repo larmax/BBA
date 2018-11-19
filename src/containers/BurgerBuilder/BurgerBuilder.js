@@ -3,7 +3,7 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
-
+import styles from './BurgerBuilder.module.css';
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -70,9 +70,11 @@ class BurgerBuilder extends Component{
     }
 
   }
-totalPriceHandler = (totalPrice) => {
-let totalPriceRounded = Math.round(totalPrice * 100) / 100;
+roundedHandler = (totalPrice) => {
+const totalPriceRounded = totalPrice.toFixed(2);
+console.log("Total price:",totalPriceRounded);
 return totalPriceRounded;
+
 }
 
 purchaseHandler = () => {
@@ -84,6 +86,11 @@ console.log('purchasing?',this.state.purchasing);
 purchaseCancelHandler = () => {
   this.setState({purchasing: false});
 }
+
+purchaseContinueHandler = () => {
+  alert('continuing');
+}
+
 
 
   render() {
@@ -102,10 +109,16 @@ purchaseCancelHandler = () => {
       <Modal
   show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}
       >
-      <OrderSummary ingredients={this.state.ingredients} />
+      <OrderSummary
+      ingredients={this.state.ingredients}
+      purchaseCancelled={this.purchaseCancelHandler}
+      purchaseContinued={this.purchaseContinueHandler}
+      price={this.roundedHandler(this.state.totalPrice)}
+
+       />
       </Modal>
       <Burger ingredients={this.state.ingredients}/>
-      <p>Price: {this.totalPriceHandler(this.state.totalPrice)}</p>
+      <p className={styles.Price}>Price: {this.roundedHandler(this.state.totalPrice)}</p>
       <BuildControls
       ingredientRemoved={this.removeIngredientHandler}
       ingredientAdded={this.addIngredientHandler}

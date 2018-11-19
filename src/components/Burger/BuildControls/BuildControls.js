@@ -11,7 +11,7 @@ const controls = [
 
 ];
 const buildControls = (props) => (
-  <div className={ styles.buildControl }>
+  <div className={ styles.BuildControls }>
   { controls.map(ctrl => (
     <BuildControl
     key= { ctrl.key }
