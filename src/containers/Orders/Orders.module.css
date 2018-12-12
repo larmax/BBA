@@ -1,0 +1,11 @@
+.Orders{
+  margin-top: 50px;
+    padding-top: 50px;
+  width: 100%;
+  margin: auto;
+
+
+
+  overflow: scroll;
+  text-align: left;
+}
