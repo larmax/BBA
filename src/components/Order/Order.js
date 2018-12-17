@@ -3,7 +3,7 @@ import styles from './Order.module.css';
   const order = (props) => (
 <div className={styles.Order}>
 <p> Ingredients: {props.ingredients}</p>
-
+<p> Order Form: {props.orderData} </p>
 <p> Price {props.price} €</p>
 </div>
 );
